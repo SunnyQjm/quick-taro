@@ -2,8 +2,13 @@ import Taro, {Component, Config} from '@tarojs/taro'
 import {View, Text} from '@tarojs/components'
 import './index.scss'
 import {
-  QuickTaroNavBar
+  QuickTaroNavBar,
+  QuickTaroFloatBtnMenu
 } from '../../components';
+import {
+  icon_close_black,
+  logo_header
+} from '../../images'
 
 export default class Index extends Component {
 
@@ -16,6 +21,11 @@ export default class Index extends Component {
    */
   config: Config = {
     navigationBarTitleText: '首页'
+  };
+
+  constructor(props) {
+    super(props);
+    this.handleOnMenuItemClick = this.handleOnMenuItemClick.bind(this);
   }
 
   componentWillMount() {
@@ -33,6 +43,10 @@ export default class Index extends Component {
   componentDidHide() {
   }
 
+  handleOnMenuItemClick(index: number, menuText: string) {
+
+  }
+
   render() {
     return (
       <View className='index'>
@@ -40,6 +54,10 @@ export default class Index extends Component {
           title='QuickTaroDemo'
           barBg='#ccc'
         />
+        <QuickTaroFloatBtnMenu
+          icon={logo_header}
+          changeIcon={icon_close_black}
+          onMenuItemClick={this.handleOnMenuItemClick} />
         <Text>Hello world!</Text>
       </View>
     )

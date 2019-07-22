@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
-import Taro, { SelectorQuery } from '@tarojs/taro';
+import Taro, {SelectorQuery} from '@tarojs/taro';
 
-class QuickTaroBaseComponent<P, S> extends Taro.PureComponent<P, S>{
+class QuickTaroBaseComponent<P, S> extends Taro.PureComponent<P, S> {
 
   isH5() {
     return process.env.TARO_ENV === 'h5'
@@ -19,15 +19,12 @@ class QuickTaroBaseComponent<P, S> extends Taro.PureComponent<P, S>{
       query = Taro.createSelectorQuery().in(this.$scope)
     }
     return new Promise((resolve, reject) => {
-      query.select(selector)
+      let tmp = query.select(selector)
         .boundingClientRect(rect => {
-          if(!!rect)
-            resolve(rect);
-          else
-            reject(rect);
-        })
-        .exec();
-    })
+          !!rect ? resolve(rect) : reject(rect);
+        });
+      tmp && tmp.exec();
+    });
   }
 }
 

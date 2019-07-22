@@ -1,0 +1,56 @@
+@import "../../scss/font-size";
+
+.quick-taro-float-menu-mask {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  background-color: black;
+  opacity: 0.2;
+  z-index: 11;
+}
+
+.quick-taro-float-menu-body {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  background-color: white;
+  border-radius: 10px;
+  align-items: center;
+  z-index: 12;
+}
+
+.quick-taro-float-menu-body-right-bottom {
+  right: 0;
+  bottom: 0;
+}
+
+.quick-taro-float-menu-body-right-top {
+  right: 0;
+  bottom: 0;
+}
+
+.quick-taro-float-menu-body-left-bottom {
+  right: 0;
+  bottom: 0;
+}
+
+.quick-taro-float-menu-body-left-top {
+  right: 0;
+  bottom: 0;
+}
+
+
+.quick-taro-menu-item {
+  margin: 0 20px;
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  color: grey;
+  font-size: $fs_0_9;
+}
+
+.quick-taro-menu-item-hover {
+  background-color: rgb(224, 224, 224);
+  color: white;
+}
