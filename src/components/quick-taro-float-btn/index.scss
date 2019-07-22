@@ -1,0 +1,48 @@
+/* components/quick-taro-float-btn/index.wxss */
+@import "../../scss/font-size";
+.quick-taro-float-btn-icon-body {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #62c1e9;
+  border-radius: 50%;
+  box-shadow: 3px 3px 20px #ffda44;
+  z-index: 12;
+}
+
+.quick-taro-float-btn-icon-body-left-top {
+  left: 0;
+  top: 0;
+}
+
+
+.quick-taro-float-btn-icon-body-left-bottom {
+  left: 0;
+  bottom: 0;
+}
+
+
+.quick-taro-float-btn-icon-body-right-top {
+  right: 0;
+  top: 0;
+}
+
+.quick-taro-float-btn-icon-body-right-bottom {
+  right: 0;
+  bottom: 0;
+}
+
+.quick-taro-float-btn-icon{
+  width: 40px;
+  height: 40px;
+}
+
+.quick-taro-float-btn-icon-hover {
+  transition-duration: 0.3s;
+  /* transform: translateY(-1px) rotate(8deg); */
+}
