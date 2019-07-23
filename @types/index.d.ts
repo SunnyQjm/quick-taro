@@ -5,4 +5,4 @@ export { default as QuickTaroFloatBtnMenu } from './float-btn-menu';
 export { default as QuickTaroMask } from './mask';
 export { default as QuickTaroLoading } from './loading';
 export { default as QuickTaroContentWrapper } from './content-wrapper';
-export { default as QuickTaroEasyPage } from '../src/components/quick-taro-easy-page';
+export { default as QuickTaroEasyPage } from './easy-page';
