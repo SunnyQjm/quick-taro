@@ -7,6 +7,7 @@ import BaseComponent from '../quick-taro-base-component';
 import QuickTaroFloatBtn from '../quick-taro-float-btn';
 import QuickTaroLoading from '../quick-taro-loading';
 import './index.scss';
+import 'taro-ui/dist/style/components/message.scss'
 import {
   back_top
 } from '../../images'

@@ -6,4 +6,5 @@ export { default as QuickTaroMask } from './components/quick-taro-mask';
 export { default as QuickTaroLoading } from './components/quick-taro-loading';
 export { default as QuickTaroContentWrapper } from './components/quick-taro-content-wrapper';
 export { default as QuickTaroEasyPage } from './components/quick-taro-easy-page';
+export { default as QuickTaroCircleLoading } from './components/quick-taro-circle-loading';
 

@@ -3,7 +3,8 @@ import {View, Text} from '@tarojs/components'
 import './index.scss'
 import {
   QuickTaroFloatBtnMenu,
-  QuickTaroEasyPage
+  QuickTaroEasyPage,
+  QuickTaroCircleLoading
 } from '../../components';
 import {
   icon_close_black,
@@ -77,10 +78,12 @@ export default class Index extends Component<IndexProps, IndexState> {
             barBg: '#ccc',
           }}
           contentWrapperProps={{
-            showLoading: showLoading
-          }}
+            showLoading: showLoading,
+          }
+          }
         >
           <Text>Hello world!</Text>
+          <QuickTaroCircleLoading customStyle={`margin: ${Taro.pxTransform(10)}`}/>
         </QuickTaroEasyPage>
         <QuickTaroFloatBtnMenu
           icon={logo_header}
