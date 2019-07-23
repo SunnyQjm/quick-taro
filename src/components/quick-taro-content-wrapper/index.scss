@@ -1,0 +1,11 @@
+@import "../../scss/base-color.scss";
+
+.quick-taro-content-wrapper-body {
+  height: 100%;
+  position: relative;
+  background-color: $theme-bg-color;
+}
+
+.quick-taro-content-wrapper-test {
+  background-color: green;
+}

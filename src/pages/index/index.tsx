@@ -3,7 +3,8 @@ import {View, Text} from '@tarojs/components'
 import './index.scss'
 import {
   QuickTaroNavBar,
-  QuickTaroFloatBtnMenu
+  QuickTaroFloatBtnMenu,
+  QuickTaroContentWrapper
 } from '../../components';
 import {
   icon_close_black,
@@ -43,8 +44,15 @@ export default class Index extends Component {
   componentDidHide() {
   }
 
-  handleOnMenuItemClick(index: number, menuText: string) {
-
+  handleOnMenuItemClick(index: number) {
+    switch (index) {
+      case 0:
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+    }
   }
 
   render() {
@@ -54,11 +62,13 @@ export default class Index extends Component {
           title='QuickTaroDemo'
           barBg='#ccc'
         />
+        <QuickTaroContentWrapper>
+          <Text>Hello world!</Text>
+        </QuickTaroContentWrapper>
         <QuickTaroFloatBtnMenu
           icon={logo_header}
           changeIcon={icon_close_black}
-          onMenuItemClick={this.handleOnMenuItemClick} />
-        <Text>Hello world!</Text>
+          onMenuItemClick={this.handleOnMenuItemClick}/>
       </View>
     )
   }
