@@ -9,18 +9,18 @@ import BaseComponent from '../quick-taro-base-component';
 import './index.scss';
 
 interface XbFloatBtnProps {
-  btnSize: number,
-  position: 'left-top' | 'left-bottom' | 'right-top' | 'right-bottom',
-  verticalMargin: number,
-  horizontalMargin: number,
-  icon: string,
-  iconSize: number,
-  backgroundColor: string,
-  shadowColor: string,
-  hide: boolean,
-  duration: number,
-  changeIcon: string,
-  onClick: (e: ITouchEvent) => void
+  btnSize?: number,
+  position?: 'left-top' | 'left-bottom' | 'right-top' | 'right-bottom',
+  verticalMargin?: number,
+  horizontalMargin?: number,
+  icon?: string,
+  iconSize?: number,
+  backgroundColor?: string,
+  shadowColor?: string,
+  hide?: boolean,
+  duration?: number,
+  changeIcon?: string,
+  onClick?: (e: ITouchEvent) => void
 }
 
 interface XbFloatBtnState {
@@ -68,26 +68,29 @@ class XbFloatBtn extends BaseComponent<XbFloatBtnProps, XbFloatBtnState> {
   componentWillMount(): void {
     let hide = this.props.hide;
     this.btn_status = hide ? 'hided' : 'showed';
-    let p = {
+    let p: any = {
       _hide: hide
     };
-    switch (this.props.position) {
-      case 'left-top':
-        p['left'] = hide ? '-' + Taro.pxTransform(this.props.btnSize) : Taro.pxTransform(this.props.horizontalMargin);
-        p['top'] = Taro.pxTransform(this.props.verticalMargin);
-        break;
-      case 'left-bottom':
-        p['left'] = hide ? '-' + Taro.pxTransform(this.props.btnSize) : Taro.pxTransform(this.props.horizontalMargin);
-        p['bottom'] = Taro.pxTransform(this.props.verticalMargin);
-        break;
-      case 'right-top':
-        p['right'] = hide ? '-' + Taro.pxTransform(this.props.btnSize) : Taro.pxTransform(this.props.horizontalMargin);
-        p['top'] = Taro.pxTransform(this.props.verticalMargin);
-        break;
-      case 'right-bottom':
-        p['right'] = hide ? '-' + Taro.pxTransform(this.props.btnSize) : Taro.pxTransform(this.props.horizontalMargin);
-        p['bottom'] = Taro.pxTransform(this.props.verticalMargin);
-        break;
+    if (this.props.btnSize != undefined && this.props.horizontalMargin != undefined
+      && this.props.verticalMargin != undefined) {
+      switch (this.props.position) {
+        case 'left-top':
+          p['left'] = hide ? '-' + Taro.pxTransform(this.props.btnSize) : Taro.pxTransform(this.props.horizontalMargin);
+          p['top'] = Taro.pxTransform(this.props.verticalMargin);
+          break;
+        case 'left-bottom':
+          p['left'] = hide ? '-' + Taro.pxTransform(this.props.btnSize) : Taro.pxTransform(this.props.horizontalMargin);
+          p['bottom'] = Taro.pxTransform(this.props.verticalMargin);
+          break;
+        case 'right-top':
+          p['right'] = hide ? '-' + Taro.pxTransform(this.props.btnSize) : Taro.pxTransform(this.props.horizontalMargin);
+          p['top'] = Taro.pxTransform(this.props.verticalMargin);
+          break;
+        case 'right-bottom':
+          p['right'] = hide ? '-' + Taro.pxTransform(this.props.btnSize) : Taro.pxTransform(this.props.horizontalMargin);
+          p['bottom'] = Taro.pxTransform(this.props.verticalMargin);
+          break;
+      }
     }
 
     p['currentIcon'] = this.props.icon;
@@ -103,7 +106,7 @@ class XbFloatBtn extends BaseComponent<XbFloatBtnProps, XbFloatBtnState> {
   ////////// 事件处理函数
   ////////////////////////////////////////////////////////////
   onFloatBtnClick(e: ITouchEvent) {
-    this.props.onClick(e);
+    this.props.onClick && this.props.onClick(e);
   }
 
 
@@ -129,11 +132,13 @@ class XbFloatBtn extends BaseComponent<XbFloatBtnProps, XbFloatBtnState> {
   hide() {
     if (!this.state._hide && this.btn_status === 'showed') {
       this.btn_status = 'hiding';
-      //未隐藏则执行隐藏功能
-      if (this.props.position.startsWith('right'))
-        this.animation.right(`-${Taro.pxTransform(this.props.btnSize + this.props.horizontalMargin)}`).step();
-      else if (this.props.position.startsWith('left')) {
-        this.animation.left(`-${Taro.pxTransform(this.props.btnSize + this.props.horizontalMargin)}`).step();
+      if (this.props.position && this.props.btnSize != undefined && this.props.horizontalMargin != undefined) {
+        //未隐藏则执行隐藏功能
+        if (this.props.position.startsWith('right'))
+          this.animation.right(`-${Taro.pxTransform(this.props.btnSize + this.props.horizontalMargin)}`).step();
+        else if (this.props.position.startsWith('left')) {
+          this.animation.left(`-${Taro.pxTransform(this.props.btnSize + this.props.horizontalMargin)}`).step();
+        }
       }
       this.setState({
         _hide: true,
@@ -150,11 +155,13 @@ class XbFloatBtn extends BaseComponent<XbFloatBtnProps, XbFloatBtnState> {
   show = () => {
     if (this.state._hide && this.btn_status === 'hided') {
       this.btn_status = 'showing';
-      //隐藏则执行显示功能
-      if (this.props.position.startsWith('right'))
-        this.animation.right(`${Taro.pxTransform(this.props.btnSize + this.props.horizontalMargin)}`).step();
-      else if (this.props.position.startsWith('left')) {
-        this.animation.left(`${Taro.pxTransform(this.props.btnSize + this.props.horizontalMargin)}`).step();
+      if (this.props.position && this.props.btnSize != undefined && this.props.horizontalMargin != undefined) {
+        //隐藏则执行显示功能
+        if (this.props.position.startsWith('right'))
+          this.animation.right(`${Taro.pxTransform(this.props.btnSize + this.props.horizontalMargin)}`).step();
+        else if (this.props.position.startsWith('left')) {
+          this.animation.left(`${Taro.pxTransform(this.props.btnSize + this.props.horizontalMargin)}`).step();
+        }
       }
       this.setState({
         _hide: false,
@@ -177,6 +184,10 @@ class XbFloatBtn extends BaseComponent<XbFloatBtnProps, XbFloatBtnState> {
    * @param open
    */
   change = open => {
+    let duration = 0;
+    if(this.props.duration) {
+      duration = this.props.duration;
+    }
     if (open) {
       this.animation.rotateY(180).step();
       this.setState({
@@ -184,9 +195,9 @@ class XbFloatBtn extends BaseComponent<XbFloatBtnProps, XbFloatBtnState> {
       });
       setTimeout(() => {
         this.setState({
-          currentIcon: this.props.changeIcon
+          currentIcon: this.props.changeIcon ? this.props.changeIcon : ""
         });
-      }, this.props.duration / 2);
+      }, duration / 2);
     } else {
       this.animation.rotateY(-180).step();
       this.setState({
@@ -194,9 +205,9 @@ class XbFloatBtn extends BaseComponent<XbFloatBtnProps, XbFloatBtnState> {
       });
       setTimeout(() => {
         this.setState({
-          currentIcon: this.props.icon
+          currentIcon: this.props.icon ? this.props.icon  : ""
         });
-      }, this.props.duration / 2);
+      }, duration / 2);
     }
   };
 
@@ -223,8 +234,8 @@ class XbFloatBtn extends BaseComponent<XbFloatBtnProps, XbFloatBtnState> {
         style={
           `box-shadow: ${Taro.pxTransform(3)} ${Taro.pxTransform(3)} ${Taro.pxTransform(20)} ${shadowColor};
           background-color: ${backgroundColor};
-          width: ${Taro.pxTransform(btnSize)};
-          height: ${Taro.pxTransform(btnSize)};
+          width: ${Taro.pxTransform(btnSize ?  btnSize : 0)};
+          height: ${Taro.pxTransform(btnSize ? btnSize : 0)};
           ${(!!left ? 'margin-left: ' + left + ';' : '')}
           ${(!!right ? 'margin-right: ' + right + '; ' : '')}
           ${(!!top ? 'margin-top: ' + top + '; ' : '')}
@@ -237,7 +248,7 @@ class XbFloatBtn extends BaseComponent<XbFloatBtnProps, XbFloatBtnState> {
           className='quick-taro-float-btn-icon'
           src={currentIcon}
           mode='aspectFit'
-          style={`width: ${Taro.pxTransform(iconSize)}; height: ${Taro.pxTransform(iconSize)};`}
+          style={`width: ${Taro.pxTransform(iconSize ? iconSize : 0)}; height: ${Taro.pxTransform(iconSize ? iconSize : 0)};`}
         />
       </View>
     );

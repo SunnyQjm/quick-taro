@@ -10,23 +10,23 @@ import QuickTaroFloatBtn from '../quick-taro-float-btn';
 import QuickTaroMask from '../quick-taro-mask';
 
 interface QuickTaroFloatBtnMenuProps {
-  btnSize: number,
-  position: 'left-top' | 'left-bottom' | 'right-top' | 'right-bottom',
-  verticalMargin: number,
-  horizontalMargin: number,
-  icon: string,
-  changeIcon: string,
-  iconSize: number,
-  iconBg: string,
-  iconShadowColor: string,
-  duration: number,
-  menuList: string[],
-  menuRadius: number,
-  menuItemFontSize: number,
-  open: false,
-  btnMenuMargin: number,
-  declareMenuWidth: number,
-  onMenuItemClick: (index: number, menuText: string) => void,
+  btnSize?: number,
+  position?: 'left-top' | 'left-bottom' | 'right-top' | 'right-bottom',
+  verticalMargin?: number,
+  horizontalMargin?: number,
+  icon?: string,
+  changeIcon?: string,
+  iconSize?: number,
+  iconBg?: string,
+  iconShadowColor?: string,
+  duration?: number,
+  menuList?: string[],
+  menuRadius?: number,
+  menuItemFontSize?: number,
+  open?: false,
+  btnMenuMargin?: number,
+  declareMenuWidth?: number,
+  onMenuItemClick?: (index: number, menuText: string) => void,
 }
 
 interface QuickTaroFloatBtnMenuState {
@@ -101,8 +101,11 @@ class QuickTaroFloatBtnMenu extends QuickTaroBarComponent<QuickTaroFloatBtnMenuP
   componentWillMount(): void {
     let param = {};
     let menuItemStyles: string[] = [];
-    const size = this.props.menuList.length;
-    const radius = this.props.menuRadius;
+    const size = this.props.menuList ? this.props.menuList.length : 0;
+    let radius = 0;
+    if (this.props.menuRadius) {
+      radius = this.props.menuRadius;
+    }
     let baseStyle = '';
     if (size === 1) {
       //如果只有一项，则应该给该item的四个角都设置圆角
@@ -110,7 +113,7 @@ class QuickTaroFloatBtnMenu extends QuickTaroBarComponent<QuickTaroFloatBtnMenuP
         `${baseStyle}border-radius: ${Taro.pxTransform(radius)}`
       );
     } else {
-      this.props.menuList.forEach((_, index) => {
+      this.props.menuList && this.props.menuList.forEach((_, index) => {
         if (index === 0) {
           //头
           menuItemStyles.push(
@@ -131,28 +134,31 @@ class QuickTaroFloatBtnMenu extends QuickTaroBarComponent<QuickTaroFloatBtnMenuP
     let open = this.props.open;
     let declareMenuWidth = this.props.declareMenuWidth;
     let menuBodyStyle = '';
-    switch (this.props.position) {
-      case 'left-top':
-        param['left'] = !open ? -declareMenuWidth : this.props.horizontalMargin;
-        param['top'] = this.props.verticalMargin;
-        param['positionIndex'] = -1;
-        break;
-      case 'left-bottom':
-        param['left'] = !open ? -declareMenuWidth : this.props.horizontalMargin;
-        param['bottom'] = this.props.verticalMargin;
-        param['positionIndex'] = 1;
-        break;
-      case 'right-top':
-        param['right'] = !open ? -declareMenuWidth : this.props.horizontalMargin;
-        param['top'] = this.props.verticalMargin;
-        param['positionIndex'] = -2;
-        break;
-      case 'right-bottom':
-        param['right'] = !open ? -declareMenuWidth : this.props.horizontalMargin;
-        param['bottom'] =
-          this.props.verticalMargin + this.props.btnSize + this.props.btnMenuMargin;
-        param['positionIndex'] = 2;
-        break;
+    if (declareMenuWidth != null && this.props.verticalMargin != null
+      && this.props.btnMenuMargin != null && this.props.btnSize != null) {
+      switch (this.props.position) {
+        case 'left-top':
+          param['left'] = !open ? -declareMenuWidth : this.props.horizontalMargin;
+          param['top'] = this.props.verticalMargin;
+          param['positionIndex'] = -1;
+          break;
+        case 'left-bottom':
+          param['left'] = !open ? -declareMenuWidth : this.props.horizontalMargin;
+          param['bottom'] = this.props.verticalMargin;
+          param['positionIndex'] = 1;
+          break;
+        case 'right-top':
+          param['right'] = !open ? -declareMenuWidth : this.props.horizontalMargin;
+          param['top'] = this.props.verticalMargin;
+          param['positionIndex'] = -2;
+          break;
+        case 'right-bottom':
+          param['right'] = !open ? -declareMenuWidth : this.props.horizontalMargin;
+          param['bottom'] =
+            this.props.verticalMargin + this.props.btnSize + this.props.btnMenuMargin;
+          param['positionIndex'] = 2;
+          break;
+      }
     }
 
     param['menuBodyStyle'] = menuBodyStyle;
@@ -188,17 +194,19 @@ class QuickTaroFloatBtnMenu extends QuickTaroBarComponent<QuickTaroFloatBtnMenuP
     switch (this.props.position) {
       case 'left-bottom':
       case 'left-top':
-        this.animation
-          .opacity(1)
-          .left(`${Taro.pxTransform(this.props.horizontalMargin + this.props.declareMenuWidth)}`)
-          .step();
+        if (this.props.horizontalMargin != null && this.props.declareMenuWidth != null)
+          this.animation
+            .opacity(1)
+            .left(`${Taro.pxTransform(this.props.horizontalMargin + this.props.declareMenuWidth)}`)
+            .step();
         break;
       case 'right-bottom':
       case 'right-top':
-        this.animation
-          .opacity(1)
-          .right(`${Taro.pxTransform(this.props.horizontalMargin + this.props.declareMenuWidth)}`)
-          .step();
+        if (this.props.horizontalMargin != null && this.props.declareMenuWidth != null)
+          this.animation
+            .opacity(1)
+            .right(`${Taro.pxTransform(this.props.horizontalMargin + this.props.declareMenuWidth)}`)
+            .step();
         break;
     }
     const animationData = this.animation.export();
@@ -219,17 +227,19 @@ class QuickTaroFloatBtnMenu extends QuickTaroBarComponent<QuickTaroFloatBtnMenuP
     switch (this.props.position) {
       case 'left-bottom':
       case 'left-top':
-        this.animation
-          .opacity(0.2)
-          .left(`-${Taro.pxTransform(this.props.horizontalMargin + this.props.declareMenuWidth)}`)
-          .step();
+        if (this.props.horizontalMargin != null && this.props.declareMenuWidth != null)
+          this.animation
+            .opacity(0.2)
+            .left(`-${Taro.pxTransform(this.props.horizontalMargin + this.props.declareMenuWidth)}`)
+            .step();
         break;
       case 'right-bottom':
       case 'right-top':
-        this.animation
-          .opacity(0.2)
-          .right(`-${Taro.pxTransform(this.props.horizontalMargin + this.props.declareMenuWidth)}`)
-          .step();
+        if (this.props.horizontalMargin != null && this.props.declareMenuWidth != null)
+          this.animation
+            .opacity(0.2)
+            .right(`-${Taro.pxTransform(this.props.horizontalMargin + this.props.declareMenuWidth)}`)
+            .step();
         break;
     }
 
@@ -245,7 +255,7 @@ class QuickTaroFloatBtnMenu extends QuickTaroBarComponent<QuickTaroFloatBtnMenuP
    */
   onItemClick(e: ITouchEvent) {
     const index = Number(e.currentTarget.id);
-    this.props.onMenuItemClick(index, this.props.menuList[index]);
+    this.props.onMenuItemClick && this.props.menuList && this.props.onMenuItemClick(index, this.props.menuList[index]);
 
     // 菜单项被点击后，菜单自动关闭
     this.close();
@@ -300,7 +310,7 @@ class QuickTaroFloatBtnMenu extends QuickTaroBarComponent<QuickTaroFloatBtnMenuP
       _open
     } = this.state;
 
-    const menuItemList = menuList.map((item, index) => {
+    const menuItemList = menuList && menuList.map((item, index) => {
       return (
         <View
           id={String(index)}

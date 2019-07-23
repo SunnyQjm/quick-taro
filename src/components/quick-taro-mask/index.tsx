@@ -6,16 +6,16 @@ import './index.scss';
 
 
 interface QuickTaroMaskProps {
-  zIndex: number,
-  opacity: number,
-  backgroundColor: string,
-  duration: number,
-  initShow: boolean,
+  zIndex?: number,
+  opacity?: number,
+  backgroundColor?: string,
+  duration?: number,
+  initShow?: boolean,
   /**
    * 是否开启点击Hide Mask
    */
-  clickHide: boolean,
-  onHide: (show: boolean) => void
+  clickHide?: boolean,
+  onHide?: (show: boolean) => void
 }
 
 interface QuickTaroMaskState {
@@ -49,9 +49,9 @@ class QuickTaroMask extends BaseComponent<QuickTaroMaskProps, QuickTaroMaskState
     super(props);
     this.state = {
       animationData: [],
-      _zIndex: this.props.initShow ? this.props.zIndex : -1
+      _zIndex: this.props.initShow ? this.props.zIndex ? this.props.zIndex : 11 : -1
     };
-    this._show = this.props.initShow;
+    this._show = !!this.props.initShow;
     this.animation = Taro.createAnimation({
       duration: this.props.duration,
       timingFunction: 'ease'
@@ -65,7 +65,7 @@ class QuickTaroMask extends BaseComponent<QuickTaroMaskProps, QuickTaroMaskState
   handleOnMaskClick() {
     if (this._show && this.props.clickHide) {
       this.hide();
-      this.props.onHide(this._show);
+      this.props.onHide && this.props.onHide(this._show);
     }
   }
 
@@ -75,7 +75,7 @@ class QuickTaroMask extends BaseComponent<QuickTaroMaskProps, QuickTaroMaskState
         .opacity(this.props.opacity)
         .step();
       this.setState({
-        _zIndex: this.props.zIndex,
+        _zIndex: this.props.zIndex ? this.props.zIndex : 0,
         animationData: this.animation.export()
       });
       this._show = true;

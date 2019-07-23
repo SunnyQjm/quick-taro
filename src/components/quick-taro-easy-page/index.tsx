@@ -7,8 +7,8 @@ import './index.scss';
 
 
 interface QuickTaroEasyPageComponentProps {
-  navBarProps: QuickTaroNavBarProps,
-  contentWrapperProps: QuickTaroContentWrapperProps
+  navBarProps?: QuickTaroNavBarProps,
+  contentWrapperProps?: QuickTaroContentWrapperProps
 }
 
 interface QuickTaroEasyPageComponentState {

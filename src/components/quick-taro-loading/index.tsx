@@ -6,16 +6,16 @@ import './index.scss';
 
 
 interface QuickTaroLoadingProps {
-  zIndex: number,
+  zIndex?: number,
 
   /**
    * 水波纹特效的大小范围
    */
-  size: number,
-  color: string,
-  maskColor: string,
-  maskOpacity: number,
-  text: string,
+  size?: number,
+  color?: string,
+  maskColor?: string,
+  maskOpacity?: number,
+  text?: string,
 }
 
 interface QuickTaroLoadingState {
@@ -49,7 +49,7 @@ class QuickTaroLoading extends QuickTaroBaseComponent<QuickTaroLoadingProps, Qui
       maskOpacity,
       text
     } = this.props;
-    const sizeText = Taro.pxTransform(size);
+    const sizeText = Taro.pxTransform(size ? size : 0);
     return (
       <Block>
         <View className='quick-taro-loading-body'>
