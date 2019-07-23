@@ -36,11 +36,11 @@ class QuickTaroEasyPageComponent extends BaseComponent<QuickTaroEasyPageComponen
     } = this.state;
     return (
       <QuickTaroContentWrapper
-        {...this.props.navBarProps}
+        {...this.props.contentWrapperProps}
         headerHeight={headerHeight}
         renderHeader={
           <QuickTaroNavBar
-            {...this.props.contentWrapperProps}
+            {...this.props.navBarProps}
             onHeightChange={(height) => {
               this.setState({
                 headerHeight: height

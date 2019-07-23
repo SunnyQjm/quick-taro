@@ -4,8 +4,8 @@ import {QuickTaroContentWrapperProps} from './content-wrapper';
 import {ComponentClass} from "react";
 
 export interface QuickTaroEasyPageProps extends QuickTaroBarComponentProps{
-  navBarProps: QuickTaroNavBarProps,
-  contentWrapperProps: QuickTaroContentWrapperProps
+  navBarProps?: QuickTaroNavBarProps,
+  contentWrapperProps?: QuickTaroContentWrapperProps
 }
 
 declare const QuickTaroEasyPage: ComponentClass<QuickTaroEasyPageProps>;
