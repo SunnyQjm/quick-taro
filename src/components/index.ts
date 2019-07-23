@@ -5,6 +5,7 @@ import QuickTaroFloatBtnMenu from './quick-taro-float-btn-menu';
 import QuickTaroMask from './quick-taro-mask';
 import QuickTaroLoading from './quick-taro-loading';
 import QuickTaroContentWrapper from './quick-taro-content-wrapper';
+import QuickTaroEasyPage from './quick-taro-easy-page';
 
 export {
   QuickTaroBarComponent,
@@ -13,5 +14,6 @@ export {
   QuickTaroMask,
   QuickTaroFloatBtnMenu,
   QuickTaroLoading,
-  QuickTaroContentWrapper
+  QuickTaroContentWrapper,
+  QuickTaroEasyPage
 }

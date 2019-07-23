@@ -1,32 +1,33 @@
-import Taro, {Component, Config} from '@tarojs/taro'
+import Taro, {Component} from '@tarojs/taro'
 import {View, Text} from '@tarojs/components'
 import './index.scss'
 import {
-  QuickTaroNavBar,
   QuickTaroFloatBtnMenu,
-  QuickTaroContentWrapper
+  QuickTaroEasyPage
 } from '../../components';
 import {
   icon_close_black,
   logo_header
 } from '../../images'
 
-export default class Index extends Component {
+interface IndexProps {
 
-  /**
-   * 指定config的类型声明为: Taro.Config
-   *
-   * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
-   * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
-   */
-  config: Config = {
-    navigationBarTitleText: '首页'
-  };
+}
+
+interface IndexState {
+  showLoading: boolean,
+  headerHeight: number,
+}
+
+export default class Index extends Component<IndexProps, IndexState> {
 
   constructor(props) {
     super(props);
     this.handleOnMenuItemClick = this.handleOnMenuItemClick.bind(this);
+    this.state = {
+      showLoading: false,
+      headerHeight: 0
+    }
   }
 
   componentWillMount() {
@@ -47,6 +48,14 @@ export default class Index extends Component {
   handleOnMenuItemClick(index: number) {
     switch (index) {
       case 0:
+        this.setState({
+          showLoading: true
+        });
+        setTimeout(() => {
+          this.setState({
+            showLoading: false
+          })
+        }, 3000);
         break;
       case 1:
         break;
@@ -56,19 +65,31 @@ export default class Index extends Component {
   }
 
   render() {
+
+    const {
+      showLoading,
+    } = this.state;
     return (
       <View className='index'>
-        <QuickTaroNavBar
-          title='QuickTaroDemo'
-          barBg='#ccc'
-        />
-        <QuickTaroContentWrapper>
+        <QuickTaroEasyPage
+          navBarProps={{
+            title: 'QuickTaroDemo',
+            barBg: '#ccc',
+          }}
+          contentWrapperProps={{
+            showLoading: showLoading
+          }}
+        >
           <Text>Hello world!</Text>
-        </QuickTaroContentWrapper>
+        </QuickTaroEasyPage>
         <QuickTaroFloatBtnMenu
           icon={logo_header}
           changeIcon={icon_close_black}
-          onMenuItemClick={this.handleOnMenuItemClick}/>
+          onMenuItemClick={this.handleOnMenuItemClick}
+          menuList={[
+            'showLoading'
+          ]}
+        />
       </View>
     )
   }

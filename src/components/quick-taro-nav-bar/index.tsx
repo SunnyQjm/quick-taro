@@ -7,19 +7,20 @@ import BaseComponent from '../quick-taro-base-component';
 import './index.scss';
 
 export interface QuickTaroNavBarProps {
-  title: string,
-  titleStyle: string | CSSProperties,
-  leftIconVisible: boolean,
-  rightIconVisible: boolean,
-  showTitleDropDownIcon: boolean,
-  leftIcon: string,
-  rightIcon: string,
-  preventBack: boolean,
-  barBg: string,
-  dropDownImage: string,
-  onLeftIconClick: () => void,
-  onTitleClick: () => void,
-  onRightIconClick: () => void,
+  title?: string,
+  titleStyle?: string | CSSProperties,
+  leftIconVisible?: boolean,
+  rightIconVisible?: boolean,
+  showTitleDropDownIcon?: boolean,
+  leftIcon?: string,
+  rightIcon?: string,
+  preventBack?: boolean,
+  barBg?: string,
+  dropDownImage?: string,
+  onLeftIconClick?: () => void,
+  onTitleClick?: () => void,
+  onRightIconClick?: () => void,
+  onHeightChange?: (height: number) => void
 }
 
 interface QuickTaroNavBarState {
@@ -52,6 +53,9 @@ class QuickTaroNavBar extends BaseComponent<QuickTaroNavBarProps, QuickTaroNavBa
     onRightIconClick: () => {
     },
     onTitleClick: () => {
+    },
+    onHeightChange: () => {
+
     }
   };
 
@@ -74,8 +78,15 @@ class QuickTaroNavBar extends BaseComponent<QuickTaroNavBarProps, QuickTaroNavBa
     }
   }
 
+  componentDidMount(): void {
+    this.getRectInfo('.quick-taro-nav-bar-body')
+      .then((res: any) => {
+        this.props.onHeightChange && this.props.onHeightChange(res.height)
+      })
+  }
+
   onBack() {
-    this.props.onLeftIconClick();
+    this.props.onLeftIconClick && this.props.onLeftIconClick();
     if (!this.props.preventBack) {
       //默认返回
       Taro.navigateBack({});
@@ -83,11 +94,11 @@ class QuickTaroNavBar extends BaseComponent<QuickTaroNavBarProps, QuickTaroNavBa
   };
 
   onTitleClick() {
-    this.props.onTitleClick();
+    this.props.onTitleClick && this.props.onTitleClick();
   }
 
   rightIconClick() {
-    this.props.onRightIconClick();
+    this.props.onRightIconClick && this.props.onRightIconClick();
   }
 
 
@@ -119,14 +130,13 @@ class QuickTaroNavBar extends BaseComponent<QuickTaroNavBarProps, QuickTaroNavBa
         style={
           'padding-top: ' + statusBarHeight + 'px; background: ' + barBg + ';'
         }
-
       >
         <View className='quick-taro-nav-bar-title'>
           <View className='quick-taro-nav-bar-title-content' onClick={this.onTitleClick}>
             <Text style={titleStyle}>{title}</Text>
             {showTitleDropDownIcon && (
               <Image
-                src={dropDownImage}
+                src={dropDownImage ? dropDownImage : ""}
                 style={`margin-left: ${Taro.pxTransform(10)}; width: ${Taro.pxTransform(28)}; height: ${Taro.pxTransform(22)};`}
                 mode='aspectFit'
               />
@@ -136,7 +146,7 @@ class QuickTaroNavBar extends BaseComponent<QuickTaroNavBarProps, QuickTaroNavBa
         {leftIconVisible && (
           <Image
             className='quick-taro-nav-bar-back-icon'
-            src={leftIcon}
+            src={leftIcon ? leftIcon : ""}
             mode='aspectFit'
             onClick={this.onBack}
           />
@@ -144,7 +154,7 @@ class QuickTaroNavBar extends BaseComponent<QuickTaroNavBarProps, QuickTaroNavBa
         {_rightIconVisible && (
           <Image
             className='quick-taro-nav-bar-right-icon'
-            src={rightIcon}
+            src={rightIcon ? rightIcon : ""}
             mode='aspectFit'
             onClick={this.rightIconClick}
           />

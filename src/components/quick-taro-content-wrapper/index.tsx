@@ -12,48 +12,41 @@ import {
 } from '../../images'
 
 
-interface QuickTaroContentWrapperProps {
-  barHeight: number,
-  showLoading: boolean,
-  fullScreen: boolean,
-  customStyle: string,
-  onSlideLeft: () => void,
-  onSlideRight: () => void,
-  onSlideUp: () => void,
-  onSlideDown: () => void,
-  onTouchStart: (e: ITouchEvent) => any,
-  onTouchMove: (e: ITouchEvent) => any,
-  onTouchEnd: (e: ITouchEvent) => any,
-  onTouchCancel: (e: ITouchEvent) => any,
-  onScroll: (e: CommonEventFunction) => any,
-  scrollX: boolean,
-  scrollY: boolean,
-  onScrollToLower: (e: CommonEventFunction) => any,
-  loadingText: string,
-  showBackTop: boolean,
-  // empty: boolean,
-  // emptyText: string,
-  // emptyImg: string,
-  backTopBtnVerticalMargin: number,
+export interface QuickTaroContentWrapperProps {
+  headerHeight?: number,
+  renderHeader?: any,
+  showLoading?: boolean,
+  fullScreen?: boolean,
+  customStyle?: string,
+  onSlideLeft?: () => void,
+  onSlideRight?: () => void,
+  onSlideUp?: () => void,
+  onSlideDown?: () => void,
+  onTouchStart?: (e: ITouchEvent) => any,
+  onTouchMove?: (e: ITouchEvent) => any,
+  onTouchEnd?: (e: ITouchEvent) => any,
+  onTouchCancel?: (e: ITouchEvent) => any,
+  onScroll?: (e: CommonEventFunction) => any,
+  scrollX?: boolean,
+  scrollY?: boolean,
+  onScrollToLower?: (e: CommonEventFunction) => any,
+  loadingText?: string,
+  showBackTop?: boolean,
+  backTopBtnVerticalMargin?: number,
 }
 
 interface QuickTaroContentWrapperState {
   scrollTop: number,
-  statusBarHeight: number,
 }
 
 
 class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps, QuickTaroContentWrapperState> {
 
   static defaultProps = {
-    // statusBarHeight: 25,
-    barHeight: 34,
-    showLoading: false,
-    fullScreen: false,
+    headerHeight: 0,            // 标题栏的高度，微信小程序的是34pt
+    showLoading: false,       // 是否显示页面级的加载动效
+    fullScreen: false,        //
     contentStyle: '',
-    // empty: false,
-    // emptyText: '什么也没有找到呀~',
-    // emptyImg: BaseImages.Images.img_empty,
     pageSpin: false,
     customStyle: '',
     scrollX: false,
@@ -119,29 +112,19 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
       startPageY: -1
     };
     this.state = {
-      statusBarHeight: 0,
       scrollTop: 0
     }
   }
 
-  componentWillMount(): void {
-    if (this.isWeapp()) {
-      this.setState({
-        statusBarHeight: Taro.getSystemInfoSync().statusBarHeight
-      })
-    }
-  }
-
-
   handleTouchStart(e: ITouchEvent) {
     this.innerData.startPageX = e.touches[0].pageX;
     this.innerData.startPageY = e.touches[0].pageY;
-    return this.props.onTouchStart(e);
+    return this.props.onTouchStart && this.props.onTouchStart(e);
   }
 
 
   handleTouchEnd(e: ITouchEvent) {
-    this.props.onTouchEnd(e);
+    this.props.onTouchEnd && this.props.onTouchEnd(e);
     if (this.innerData.startPageX === -1 && this.innerData.startPageY === -1)
       return;
 
@@ -162,12 +145,10 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
       //处理水平触摸事件
       if (horizontalDeviation > 0) {
         //右滑
-        this.props.onSlideRight();
-        // this.parentCallback('slideRight');
+        this.props.onSlideRight && this.props.onSlideRight();
       } else {
         //左滑
-        this.props.onSlideLeft();
-        // this.parentCallback('slideLeft');
+        this.props.onSlideLeft && this.props.onSlideLeft();
       }
     }
 
@@ -175,12 +156,10 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
       //处理纵向触摸事件
       if (verticalDeviation > 0) {
         //下滑
-        this.props.onSlideDown();
-        // this.parentCallback('slideDown');
+        this.props.onSlideDown && this.props.onSlideDown();
       } else {
         //上滑
-        this.props.onSlideUp();
-        // this.parentCallback('slideUp');
+        this.props.onSlideUp && this.props.onSlideUp();
       }
     }
   }
@@ -188,11 +167,11 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
   handleTouchCancel(e: ITouchEvent) {
     this.innerData.startPageX = -1;
     this.innerData.startPageY = -1;
-    return this.props.onTouchCancel(e);
+    return this.props.onTouchCancel && this.props.onTouchCancel(e);
   }
 
   handleTouchMove(e: ITouchEvent) {
-    return this.props.onTouchMove(e);
+    return this.props.onTouchMove && this.props.onTouchMove(e);
   }
 
   backTopBtn: QuickTaroFloatBtn;
@@ -238,31 +217,25 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
         this.updateScrollTop(e.detail.scrollTop);
       }
     }
-    this.props.onScroll(e);
+    this.props.onScroll && this.props.onScroll(e);
   }
 
 
   render(): any {
     const {
-      barHeight,
+      headerHeight,
       loadingText,
       showBackTop,
       backTopBtnVerticalMargin,
-      // empty,
-      // emptyText,
-      // emptyImg
     } = this.props;
-    const {
-      statusBarHeight
-    } = this.state;
 
-    let _statusBarHeight = statusBarHeight;
-    if (this.isH5()) {
-      _statusBarHeight = 0;
-    }
     return (
       <Block>
+        <View className='quick-taro-content-wrapper-header-wrapper'>
+          {this.props.renderHeader}
+        </View>
         <ScrollView
+          {...this.props}
           className='quick-taro-content-wrapper-body'
           onTouchStart={this.handleTouchStart}
           onTouchCancel={this.handleTouchCancel} onTouchEnd={this.handleTouchEnd}
@@ -281,10 +254,9 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
           lowerThreshold={200}
           scrollWithAnimation
         >
-          <View style={'height: ' + _statusBarHeight + 'px'}/>
-          <View style={'height: ' + barHeight + 'pt'}/>
+          <View style={'height: ' + headerHeight + 'px'}/>
           <View
-            style={`${this.props.fullScreen ? 'height: calc(100vh - ' + _statusBarHeight + 'px - ' + barHeight + 'pt);' : ''}; position: relative;`}
+            style={`${this.props.fullScreen ? 'height: calc(100vh - ' + headerHeight + 'px);' : ''}; position: relative;`}
           >
             <View style='width: 100%; height: 0.01px'/>
 
@@ -300,7 +272,7 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
             ''
         }
         <AtMessage customStyle={
-          `margin-top: calc(${_statusBarHeight}px + ${barHeight}pt); z-index: 20;`
+          `margin-top: calc(${headerHeight}px); z-index: 20;`
         }
         />
         {
