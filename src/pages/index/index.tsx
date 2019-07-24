@@ -79,11 +79,81 @@ export default class Index extends Component<IndexProps, IndexState> {
           }}
           contentWrapperProps={{
             showLoading: showLoading,
+            showBackTop: true,
+            fullScreen: true
           }
           }
         >
           <Text>Hello world!</Text>
           <QuickTaroCircleLoading customStyle={`margin: ${Taro.pxTransform(10)}`}/>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
         </QuickTaroEasyPage>
         <QuickTaroFloatBtnMenu
           icon={logo_header}

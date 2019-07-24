@@ -1,4 +1,4 @@
-import Taro, {Config} from '@tarojs/taro';
+import Taro from '@tarojs/taro';
 import {View, Block, ScrollView} from '@tarojs/components';
 import {AtMessage} from 'taro-ui';
 import {CommonEventFunction, ITouchEvent} from '@tarojs/components/types/common';
@@ -50,7 +50,7 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
     contentStyle: '',
     pageSpin: false,
     customStyle: '',
-    scrollX: false,
+    scrollX: true,
     scrollY: true,
     loadingText: '',
     showBackTop: false,
@@ -89,12 +89,6 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
     startPageX: number,
     startPageY: number
   };
-
-
-  config: Config = {
-    usingComponents: {}
-  };
-
 
   constructor(props) {
     super(props);
@@ -230,40 +224,34 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
       backTopBtnVerticalMargin,
     } = this.props;
 
+    console.log(this.props);
     return (
       <Block>
         <View className='quick-taro-content-wrapper-header-wrapper'>
           {this.props.renderHeader}
         </View>
         <ScrollView
-          {...this.props}
-          className='quick-taro-content-wrapper-body'
-          onTouchStart={this.handleTouchStart}
-          onTouchCancel={this.handleTouchCancel} onTouchEnd={this.handleTouchEnd}
-          onTouchMove={this.handleTouchMove}
-          style={this.props.customStyle}
-          scrollY={this.props.scrollY}
-          scrollX={this.props.scrollX}
-          onScroll={this.handleOnScroll}
           {
             ...{
               throttle: false
             }
           }
+          scrollX={this.props.scrollX}
+          scrollY={this.props.scrollY}
+          className='quick-taro-content-wrapper-body'
+          onTouchStart={this.handleTouchStart}
+          onTouchCancel={this.handleTouchCancel} onTouchEnd={this.handleTouchEnd}
+          onTouchMove={this.handleTouchMove}
+          onScroll={this.handleOnScroll}
           scrollTop={this.state.scrollTop}
-          onScrollToLower={this.props.onScrollToLower}
           lowerThreshold={200}
           scrollWithAnimation
         >
           <View style={'height: ' + headerHeight + 'px'}/>
           <View
-            style={`${this.props.fullScreen ? 'height: calc(100vh - ' + headerHeight + 'px);' : ''}; position: relative;`}
+            style={`${this.props.fullScreen ? `height: calc(100vh - ${headerHeight}px);` : ''} position: relative;`}
           >
-            <View style='width: 100%; height: 0.01px'/>
-
             {this.props.children}
-
-
           </View>
         </ScrollView>
         {
