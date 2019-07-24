@@ -1,6 +1,7 @@
 import {QuickTaroBarComponentProps} from './base';
 import {CommonEventFunction, ITouchEvent} from "@tarojs/components/types/common";
 import {ComponentClass} from "react";
+import {QuickTaroFloatBtnProps} from "./float-btn";
 
 export interface QuickTaroContentWrapperProps extends QuickTaroBarComponentProps {
   headerHeight?: number,
@@ -22,7 +23,7 @@ export interface QuickTaroContentWrapperProps extends QuickTaroBarComponentProps
   onScrollToLower?: (e: CommonEventFunction) => any,
   loadingText?: string,
   showBackTop?: boolean,
-  backTopBtnVerticalMargin?: number,
+  backTopBtnProps?: QuickTaroFloatBtnProps,
 }
 
 declare const QuickTaroContentWrapper: ComponentClass;

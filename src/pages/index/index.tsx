@@ -80,7 +80,8 @@ export default class Index extends Component<IndexProps, IndexState> {
           contentWrapperProps={{
             showLoading: showLoading,
             showBackTop: true,
-            fullScreen: true
+            fullScreen: true,
+            backTopBtnVerticalMargin: 140
           }
           }
         >

@@ -4,7 +4,7 @@ import {AtMessage} from 'taro-ui';
 import {CommonEventFunction, ITouchEvent} from '@tarojs/components/types/common';
 
 import BaseComponent from '../quick-taro-base-component';
-import QuickTaroFloatBtn from '../quick-taro-float-btn';
+import QuickTaroFloatBtn, {QuickTaroFloatBtnProps} from '../quick-taro-float-btn';
 import QuickTaroLoading from '../quick-taro-loading';
 import './index.scss';
 import 'taro-ui/dist/style/components/message.scss'
@@ -33,7 +33,7 @@ export interface QuickTaroContentWrapperProps {
   onScrollToLower?: (e: CommonEventFunction) => any,
   loadingText?: string,
   showBackTop?: boolean,
-  backTopBtnVerticalMargin?: number,
+  backTopBtnProps?: QuickTaroFloatBtnProps,
 }
 
 interface QuickTaroContentWrapperState {
@@ -54,7 +54,10 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
     scrollY: true,
     loadingText: '',
     showBackTop: false,
-    backTopBtnVerticalMargin: 0,
+    backTopBtnProps: {
+      verticalMargin: 140,
+      horizontalMargin: 40
+    },
     onSlideLeft: () => {
 
     },
@@ -221,7 +224,7 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
       headerHeight,
       loadingText,
       showBackTop,
-      backTopBtnVerticalMargin,
+      backTopBtnProps
     } = this.props;
 
     console.log(this.props);
@@ -266,8 +269,12 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
         />
         {
           showBackTop && (
-            <QuickTaroFloatBtn onClick={this.onBackTop} icon={back_top} hide ref={this.onBackTopBtnRef}
-                               verticalMargin={backTopBtnVerticalMargin}
+            <QuickTaroFloatBtn
+              ref={this.onBackTopBtnRef}
+              onClick={this.onBackTop}
+              hide
+              {...backTopBtnProps}
+              icon={back_top}
             />
           )
         }

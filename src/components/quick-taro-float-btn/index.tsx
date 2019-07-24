@@ -8,7 +8,7 @@ import BaseComponent from '../quick-taro-base-component';
 
 import './index.scss';
 
-interface XbFloatBtnProps {
+export interface QuickTaroFloatBtnProps {
   btnSize?: number,
   position?: 'left-top' | 'left-bottom' | 'right-top' | 'right-bottom',
   verticalMargin?: number,
@@ -23,7 +23,7 @@ interface XbFloatBtnProps {
   onClick?: (e: ITouchEvent) => void
 }
 
-interface XbFloatBtnState {
+interface QuickTaroFloatBtnState {
   left: number,
   right: number,
   bottom: number,
@@ -36,7 +36,7 @@ interface XbFloatBtnState {
 /**
  * 这是一个放置在界面四角的圆形按钮组件
  */
-class XbFloatBtn extends BaseComponent<XbFloatBtnProps, XbFloatBtnState> {
+class QuickTaroFloatBtn extends BaseComponent<QuickTaroFloatBtnProps, QuickTaroFloatBtnState> {
 
 
   static defaultProps = {
@@ -45,7 +45,7 @@ class XbFloatBtn extends BaseComponent<XbFloatBtnProps, XbFloatBtnState> {
     verticalMargin: 40,
     horizontalMargin: 40,
     iconSize: 40,
-    backgroundColor: '#fff',
+    backgroundColor: '#1fe',
     shadowColor: '#0f0',
     hide: false,
     duration: 500,
@@ -75,19 +75,19 @@ class XbFloatBtn extends BaseComponent<XbFloatBtnProps, XbFloatBtnState> {
       && this.props.verticalMargin != undefined) {
       switch (this.props.position) {
         case 'left-top':
-          p['left'] = hide ? '-' + Taro.pxTransform(this.props.btnSize + this.props.horizontalMargin) : Taro.pxTransform(this.props.horizontalMargin);
+          p['left'] = hide ? '-' + Taro.pxTransform(this.props.btnSize) : Taro.pxTransform(this.props.horizontalMargin);
           p['top'] = Taro.pxTransform(this.props.verticalMargin);
           break;
         case 'left-bottom':
-          p['left'] = hide ? '-' + Taro.pxTransform(this.props.btnSize + this.props.horizontalMargin) : Taro.pxTransform(this.props.horizontalMargin);
+          p['left'] = hide ? '-' + Taro.pxTransform(this.props.btnSize) : Taro.pxTransform(this.props.horizontalMargin);
           p['bottom'] = Taro.pxTransform(this.props.verticalMargin);
           break;
         case 'right-top':
-          p['right'] = hide ? '-' + Taro.pxTransform(this.props.btnSize + this.props.horizontalMargin) : Taro.pxTransform(this.props.horizontalMargin);
+          p['right'] = hide ? '-' + Taro.pxTransform(this.props.btnSize) : Taro.pxTransform(this.props.horizontalMargin);
           p['top'] = Taro.pxTransform(this.props.verticalMargin);
           break;
         case 'right-bottom':
-          p['right'] = hide ? '-' + Taro.pxTransform(this.props.btnSize + this.props.horizontalMargin) : Taro.pxTransform(this.props.horizontalMargin);
+          p['right'] = hide ? '-' + Taro.pxTransform(this.props.btnSize) : Taro.pxTransform(this.props.horizontalMargin);
           p['bottom'] = Taro.pxTransform(this.props.verticalMargin);
           break;
       }
@@ -255,4 +255,4 @@ class XbFloatBtn extends BaseComponent<XbFloatBtnProps, XbFloatBtnState> {
   }
 }
 
-export default XbFloatBtn;
+export default QuickTaroFloatBtn;

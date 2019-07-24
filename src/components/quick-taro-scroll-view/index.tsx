@@ -144,11 +144,11 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
     })
   }
 
-  handleTouchStart(e: ITouchEvent) {
+  handleTouchStart(_: ITouchEvent) {
 
   }
 
-  handleTouchMove(e: ITouchEvent) {
+  handleTouchMove(_: ITouchEvent) {
 
   }
 
