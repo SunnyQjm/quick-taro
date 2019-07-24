@@ -227,7 +227,6 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
       backTopBtnProps
     } = this.props;
 
-    console.log(this.props);
     return (
       <Block>
         <View className='quick-taro-content-wrapper-header-wrapper'>

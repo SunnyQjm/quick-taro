@@ -4,7 +4,8 @@ import './index.scss'
 import {
   QuickTaroFloatBtnMenu,
   QuickTaroEasyPage,
-  QuickTaroCircleLoading
+  QuickTaroCircleLoading,
+  QuickTaroRefreshPoint
 } from '../../components';
 import {
   icon_close_black,
@@ -81,12 +82,20 @@ export default class Index extends Component<IndexProps, IndexState> {
             showLoading: showLoading,
             showBackTop: true,
             fullScreen: true,
-            backTopBtnVerticalMargin: 140
           }
           }
         >
           <Text>Hello world!</Text>
           <QuickTaroCircleLoading customStyle={`margin: ${Taro.pxTransform(10)}`}/>
+          <QuickTaroRefreshPoint refreshing={true} />
+          <QuickTaroRefreshPoint refreshing={false} />
+          <QuickTaroRefreshPoint refreshing={true} pointStyle={{
+            backgroundColor: '#af1'
+          }}/>
+          <QuickTaroRefreshPoint refreshing={true} pointStyle={{
+            width: Taro.pxTransform(20),
+            height: Taro.pxTransform(20)
+          }}/>
           <View>Hello world!</View>
           <View>Hello world!</View>
           <View>Hello world!</View>

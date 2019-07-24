@@ -7,3 +7,4 @@ export { default as QuickTaroLoading } from './loading';
 export { default as QuickTaroContentWrapper } from './content-wrapper';
 export { default as QuickTaroEasyPage } from './easy-page';
 export { default as QuickTaroCircleLoading } from './circle-loading';
+export { default as QuickTaroRefreshPoint } from './refresh-point';
