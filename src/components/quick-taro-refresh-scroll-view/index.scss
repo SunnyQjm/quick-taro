@@ -1,0 +1,17 @@
+.quick-taro-refresh-scroll-view-body-wrapper {
+  -webkit-transition-property: -webkit-transform;
+  transition-property: -webkit-transform;
+  -o-transition-property: transform;
+  transition-property: transform, -webkit-transform;
+}
+
+.quick-taro-refresh-scroll-view-header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+ -webkit-transition-property: -webkit-transform;
+  transition-property: -webkit-transform;
+  -o-transition-property: transform;
+  transition-property: transform, -webkit-transform;
+}

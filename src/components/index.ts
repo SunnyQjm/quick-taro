@@ -8,6 +8,7 @@ import QuickTaroContentWrapper from './quick-taro-content-wrapper';
 import QuickTaroEasyPage from './quick-taro-easy-page';
 import QuickTaroCircleLoading from './quick-taro-circle-loading';
 import QuickTaroRefreshPoint from './quick-taro-refresh-point';
+import QuickTaroRefreshScrollView from './quick-taro-refresh-scroll-view';
 
 export {
   QuickTaroBarComponent,
@@ -19,5 +20,6 @@ export {
   QuickTaroContentWrapper,
   QuickTaroEasyPage,
   QuickTaroCircleLoading,
-  QuickTaroRefreshPoint
+  QuickTaroRefreshPoint,
+  QuickTaroRefreshScrollView
 }

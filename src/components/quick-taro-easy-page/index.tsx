@@ -2,13 +2,18 @@ import Taro, {Config} from '@tarojs/taro';
 import BaseComponent from '../quick-taro-base-component';
 import QuickTaroNavBar, {QuickTaroNavBarProps} from '../quick-taro-nav-bar';
 import QuickTaroContentWrapper, {QuickTaroContentWrapperProps} from '../quick-taro-content-wrapper';
+import QuickTaroRefreshScrollView, {QuickTaroScrollViewComponentProps} from '../quick-taro-refresh-scroll-view';
+
 
 import './index.scss';
+import {Block} from "@tarojs/components";
 
 
 interface QuickTaroEasyPageComponentProps {
-  navBarProps?: QuickTaroNavBarProps,
-  contentWrapperProps?: QuickTaroContentWrapperProps
+  navBarProps: QuickTaroNavBarProps,
+  contentWrapperProps: QuickTaroContentWrapperProps,
+  refreshScrollViewProps: QuickTaroScrollViewComponentProps,
+  mode: 'content-wrapper' | 'refresh-scroll-view'
 }
 
 interface QuickTaroEasyPageComponentState {
@@ -20,7 +25,9 @@ class QuickTaroEasyPageComponent extends BaseComponent<QuickTaroEasyPageComponen
 
   static defaultProps = {
     navBarProps: {},
-    contentWrapperProps: {}
+    contentWrapperProps: {},
+    refreshScrollViewProps: {},
+    mode: 'content-wrapper'
   };
 
   constructor(props) {
@@ -32,26 +39,51 @@ class QuickTaroEasyPageComponent extends BaseComponent<QuickTaroEasyPageComponen
 
   render(): any {
     const {
-      headerHeight
+      headerHeight,
     } = this.state;
+    const {
+      contentWrapperProps,
+      refreshScrollViewProps,
+      mode,
+      navBarProps
+    } = this.props;
     return (
-      <QuickTaroContentWrapper
-        {...this.props.contentWrapperProps}
-        headerHeight={headerHeight}
-        renderHeader={
-          <QuickTaroNavBar
-            {...this.props.navBarProps}
-            onHeightChange={(height) => {
-              this.setState({
-                headerHeight: height
-              })
-            }
-            }
-          />
+      <Block>
+        <QuickTaroNavBar
+          {...navBarProps}
+          onHeightChange={(height) => {
+            this.setState({
+              headerHeight: height
+            })
+          }
+          }
+        />
+        {
+          mode === 'content-wrapper' &&
+          <QuickTaroContentWrapper
+            {...contentWrapperProps}
+            headerHeight={headerHeight}
+          >
+            {this.props.children}
+          </QuickTaroContentWrapper>
         }
-      >
-        {this.props.children}
-      </QuickTaroContentWrapper>
+
+        {
+          mode === 'refresh-scroll-view' &&
+          <QuickTaroRefreshScrollView
+            contentWrapperProps={{
+              ...contentWrapperProps,
+              headerHeight: headerHeight,
+            }}
+
+            {...refreshScrollViewProps}
+          >
+            {this.props.children}
+          </QuickTaroRefreshScrollView>
+        }
+
+      </Block>
+
     );
   }
 }

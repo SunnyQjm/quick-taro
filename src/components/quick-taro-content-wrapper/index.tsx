@@ -15,7 +15,6 @@ import {
 
 export interface QuickTaroContentWrapperProps {
   headerHeight?: number,
-  renderHeader?: any,
   showLoading?: boolean,
   fullScreen?: boolean,
   customStyle?: string,
@@ -229,9 +228,6 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
 
     return (
       <Block>
-        <View className='quick-taro-content-wrapper-header-wrapper'>
-          {this.props.renderHeader}
-        </View>
         <ScrollView
           {
             ...{

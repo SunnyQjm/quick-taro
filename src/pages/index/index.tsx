@@ -5,7 +5,7 @@ import {
   QuickTaroFloatBtnMenu,
   QuickTaroEasyPage,
   QuickTaroCircleLoading,
-  QuickTaroRefreshPoint
+  QuickTaroRefreshPoint,
 } from '../../components';
 import {
   icon_close_black,
@@ -26,6 +26,7 @@ export default class Index extends Component<IndexProps, IndexState> {
   constructor(props) {
     super(props);
     this.handleOnMenuItemClick = this.handleOnMenuItemClick.bind(this);
+    this.handleOnRefresh = this.handleOnRefresh.bind(this);
     this.state = {
       showLoading: false,
       headerHeight: 0
@@ -66,6 +67,12 @@ export default class Index extends Component<IndexProps, IndexState> {
     }
   }
 
+  handleOnRefresh(stopRefreshCallback) {
+    setTimeout(() => {
+      stopRefreshCallback();
+    }, 2000);
+  }
+
   render() {
 
     const {
@@ -74,6 +81,7 @@ export default class Index extends Component<IndexProps, IndexState> {
     return (
       <View className='index'>
         <QuickTaroEasyPage
+          mode='refresh-scroll-view'
           navBarProps={{
             title: 'QuickTaroDemo',
             barBg: '#ccc',
@@ -84,18 +92,27 @@ export default class Index extends Component<IndexProps, IndexState> {
             fullScreen: true,
           }
           }
+          refreshScrollViewProps={{
+            onRefresh: this.handleOnRefresh
+          }}
         >
           <Text>Hello world!</Text>
-          <QuickTaroCircleLoading customStyle={`margin: ${Taro.pxTransform(10)}`}/>
-          <QuickTaroRefreshPoint refreshing={true} />
-          <QuickTaroRefreshPoint refreshing={false} />
-          <QuickTaroRefreshPoint refreshing={true} pointStyle={{
-            backgroundColor: '#af1'
-          }}/>
-          <QuickTaroRefreshPoint refreshing={true} pointStyle={{
-            width: Taro.pxTransform(20),
-            height: Taro.pxTransform(20)
-          }}/>
+          {/*<QuickTaroCircleLoading customStyle={`margin: ${Taro.pxTransform(10)}`}/>*/}
+          {/*<QuickTaroRefreshPoint refreshing={true}/>*/}
+          {/*<QuickTaroRefreshPoint refreshing={false}/>*/}
+          {/*<QuickTaroRefreshPoint refreshing={true} pointStyle={{*/}
+          {/*  backgroundColor: '#af1'*/}
+          {/*}}/>*/}
+          {/*<QuickTaroRefreshPoint*/}
+          {/*  refreshing={true}*/}
+          {/*  pointStyle={{*/}
+          {/*    width: Taro.pxTransform(20),*/}
+          {/*    height: Taro.pxTransform(20),*/}
+          {/*  }}*/}
+          {/*  customStyle={{*/}
+          {/*    padding: Taro.pxTransform(30)*/}
+          {/*  }}*/}
+          {/*/>*/}
           <View>Hello world!</View>
           <View>Hello world!</View>
           <View>Hello world!</View>
