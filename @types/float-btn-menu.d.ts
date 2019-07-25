@@ -1,7 +1,7 @@
-import {QuickTaroBarComponentProps} from './base';
+import {QuickTaroBaseComponentProps} from './base';
 import {ComponentClass} from "react";
 
-export interface QuickTaroFloatBtnMenuProps extends QuickTaroBarComponentProps{
+export interface QuickTaroFloatBtnMenuProps extends QuickTaroBaseComponentProps{
   btnSize?: number,
   position?: 'left-top' | 'left-bottom' | 'right-top' | 'right-bottom',
   verticalMargin?: number,

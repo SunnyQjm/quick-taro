@@ -47,7 +47,6 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
     showLoading: false,       // 是否显示页面级的加载动效
     fullScreen: false,        //
     contentStyle: '',
-    pageSpin: false,
     customStyle: '',
     scrollX: true,
     scrollY: true,

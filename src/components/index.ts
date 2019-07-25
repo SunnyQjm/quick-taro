@@ -9,6 +9,7 @@ import QuickTaroEasyPage from './quick-taro-easy-page';
 import QuickTaroCircleLoading from './quick-taro-circle-loading';
 import QuickTaroRefreshPoint from './quick-taro-refresh-point';
 import QuickTaroRefreshScrollView from './quick-taro-refresh-scroll-view';
+import QuickTaroEmptyView from './quick-taro-empty-view';
 
 export {
   QuickTaroBarComponent,
@@ -21,5 +22,6 @@ export {
   QuickTaroEasyPage,
   QuickTaroCircleLoading,
   QuickTaroRefreshPoint,
-  QuickTaroRefreshScrollView
+  QuickTaroRefreshScrollView,
+  QuickTaroEmptyView
 }

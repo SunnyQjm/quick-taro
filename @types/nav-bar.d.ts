@@ -1,7 +1,7 @@
-import {QuickTaroBarComponentProps} from './base';
+import {QuickTaroBaseComponentProps} from './base';
 import {ComponentClass, CSSProperties} from "react";
 
-export interface QuickTaroNavBarProps extends QuickTaroBarComponentProps{
+export interface QuickTaroNavBarProps extends QuickTaroBaseComponentProps{
   title?: string,
   titleStyle?: string | CSSProperties,
   leftIconVisible?: boolean,

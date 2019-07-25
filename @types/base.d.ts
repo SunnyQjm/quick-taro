@@ -1,11 +1,11 @@
 import {ComponentClass, CSSProperties} from "react";
 
-export interface QuickTaroBarComponentProps {
+export interface QuickTaroBaseComponentProps {
   className?: string | string[] | { [key: string]: boolean }
 
   customStyle?: string | CSSProperties
 }
 
-declare const QuickTaroBarComponent: ComponentClass<QuickTaroBarComponentProps>;
+declare const QuickTaroBaseComponent: ComponentClass<QuickTaroBaseComponentProps>;
 
-export default QuickTaroBarComponent;
+export default QuickTaroBaseComponent;

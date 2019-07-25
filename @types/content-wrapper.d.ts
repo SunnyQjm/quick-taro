@@ -1,9 +1,9 @@
-import {QuickTaroBarComponentProps} from './base';
+import {QuickTaroBaseComponentProps} from './base';
 import {CommonEventFunction, ITouchEvent} from "@tarojs/components/types/common";
 import {ComponentClass} from "react";
 import {QuickTaroFloatBtnProps} from "./float-btn";
 
-export interface QuickTaroContentWrapperProps extends QuickTaroBarComponentProps {
+export interface QuickTaroContentWrapperProps extends QuickTaroBaseComponentProps {
   headerHeight?: number,
   renderHeader?: any,
   showLoading?: boolean,

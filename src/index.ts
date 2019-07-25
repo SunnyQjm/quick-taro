@@ -8,4 +8,6 @@ export { default as QuickTaroContentWrapper } from './components/quick-taro-cont
 export { default as QuickTaroEasyPage } from './components/quick-taro-easy-page';
 export { default as QuickTaroCircleLoading } from './components/quick-taro-circle-loading';
 export { default as QuickTaroRefreshPoint } from './components/quick-taro-refresh-point';
+export { default as QuickTaroRefreshScrollView } from './components/quick-taro-refresh-scroll-view';
+export { default as QuickTaroEmptyView } from './components/quick-taro-empty-view';
 

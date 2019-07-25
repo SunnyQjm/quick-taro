@@ -1,7 +1,7 @@
-import {QuickTaroBarComponentProps} from './base';
+import {QuickTaroBaseComponentProps} from './base';
 import {ComponentClass} from "react";
 
-export interface QuickTaroMaskProps extends QuickTaroBarComponentProps{
+export interface QuickTaroMaskProps extends QuickTaroBaseComponentProps{
   zIndex?: number,
   opacity?: number,
   backgroundColor?: string,

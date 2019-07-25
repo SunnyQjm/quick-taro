@@ -6,6 +6,7 @@ import {CSSProperties} from "react";
 import {ITouchEvent} from "@tarojs/components/types/common";
 import QuickTaroContentWrapper from '../quick-taro-content-wrapper';
 import QuickTaroRefreshPoint, {QuickTaroRefreshPointComponentProps} from '../quick-taro-refresh-point';
+import QuickTaroEmptyView, {QuickTaroEmptyViewComponentProps} from '../quick-taro-empty-view';
 import {View} from "@tarojs/components";
 
 interface Position {
@@ -65,18 +66,8 @@ export interface QuickTaroScrollViewComponentProps {
    * 是否数据为空
    */
   empty?: boolean,
-  /**
-   * 数据为空时的提示文字
-   */
-  emptyText?: string,
-  /**
-   * 数据为空时显示的占位图
-   */
-  emptyImg?: string,
-  /**
-   * 数据为空时显示的占位图的大小
-   */
-  emptyImgSize?: number,
+
+  emptyViewProps?: QuickTaroEmptyViewComponentProps
 }
 
 interface QuickTaroScrollViewComponentState {
@@ -104,9 +95,6 @@ interface QuickTaroScrollViewComponentState {
 class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComponentProps, QuickTaroScrollViewComponentState> {
 
   static defaultProps = {
-    empty: false,
-    emptyImg: '',
-    emptyImgSize: 300,
     emptyText: '',
     refreshHeaderProps: {},
     showBackTop: true,
@@ -121,7 +109,8 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
     enableLoadMore: true,
     enablePullRefresh: true,
     customStyle: '',
-    contentWrapperProps: {}
+    contentWrapperProps: {},
+    emptyViewProps: {}
   };
 
   constructor(props) {
@@ -295,7 +284,6 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
   }
 
   handleOnRefreshHeaderHeightChange(height: number) {
-    console.log(`onHeightChange: ${height}`);
     this.refreshHeaderHeight = height;
     this.setState({
       refreshHeaderHeight: height
@@ -306,7 +294,9 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
     const {
       contentWrapperProps,
       refreshHeaderProps,
-      springBackDuration
+      springBackDuration,
+      empty,
+      emptyViewProps
     } = this.props;
     const {
       status,
@@ -337,6 +327,13 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
           className='quick-taro-refresh-scroll-view-body-wrapper'
           style={bodyWrapperStyle}
         >
+          {
+            empty && (
+              <QuickTaroEmptyView
+                {...emptyViewProps}
+              />
+            )
+          }
           <View
             className='quick-taro-refresh-scroll-view-header-wrapper'
             style={{
@@ -347,7 +344,7 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
             <QuickTaroRefreshPoint
               refreshing={status === 'refreshing'}
               customStyle={{
-                padding: '5px'
+                padding: Taro.pxTransform(30)
               }}
               {...refreshHeaderProps}
               onHeightChange={this.handleOnRefreshHeaderHeightChange}

@@ -1,7 +1,7 @@
-import {QuickTaroBarComponentProps} from './base';
+import {QuickTaroBaseComponentProps} from './base';
 import {ComponentClass} from "react";
 
-export interface QuickTaroCircleLoadingProps extends QuickTaroBarComponentProps{
+export interface QuickTaroCircleLoadingProps extends QuickTaroBaseComponentProps{
   color?: string,
   size?: number,
   customStyle?: string,
