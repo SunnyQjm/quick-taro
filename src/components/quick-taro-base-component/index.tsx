@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import Taro, {clientRectElement, SelectorQuery} from '@tarojs/taro';
+import Taro, {clientRectElement, fieldElement, SelectorQuery} from '@tarojs/taro';
 
 class QuickTaroBaseComponent<P, S> extends Taro.PureComponent<P, S> {
 
@@ -20,7 +20,7 @@ class QuickTaroBaseComponent<P, S> extends Taro.PureComponent<P, S> {
     }
     return new Promise((resolve, reject) => {
       let tmp = query.select(selector)
-        .boundingClientRect((rect: clientRectElement) => {
+        .fields({size: true, rect: true, scrollOffset: true, dataset: true}, (rect: fieldElement) => {
           !!rect ? resolve(rect) : reject(rect);
         });
       tmp && tmp.exec();

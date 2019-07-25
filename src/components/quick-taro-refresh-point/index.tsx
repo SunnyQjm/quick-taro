@@ -52,6 +52,10 @@ class QuickTaroRefreshPointComponent extends BaseComponent<QuickTaroRefreshPoint
   }
 
   componentDidMount(): void {
+
+  }
+
+  componentWillUpdate(): void {
     this.getRectInfo('.quick-taro-refresh-point')
       .then(rect => {
         console.log(rect);

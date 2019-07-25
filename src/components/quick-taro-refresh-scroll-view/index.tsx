@@ -166,7 +166,7 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
   /**
    * 刷新头是否需要平滑滚动
    */
-  refreHeaderNeedSmoothScroll = false;
+  refreshHeaderNeedSmoothScroll = false;
 
   /**
    * 判断是否已经滚动到顶部
@@ -194,13 +194,13 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
    */
   smoothScrollTo(y: number, callback: () => any = () => {
   }) {
-    this.refreHeaderNeedSmoothScroll = true;
+    this.refreshHeaderNeedSmoothScroll = true;
     this.smoothScrollSetStateId && clearTimeout(this.smoothScrollSetStateId);
     this.setState({
       scrollDelta: y
     }, () => {
       this.smoothScrollSetStateId = setTimeout(() => {
-        this.refreHeaderNeedSmoothScroll = false;
+        this.refreshHeaderNeedSmoothScroll = false;
         callback();
       }, this.props.springBackDuration);
     })
@@ -295,6 +295,7 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
   }
 
   handleOnRefreshHeaderHeightChange(height: number) {
+    console.log(`onHeightChange: ${height}`);
     this.refreshHeaderHeight = height;
     this.setState({
       refreshHeaderHeight: height
@@ -318,7 +319,7 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
       transform: headerTranslate,
       WebkitTransform: headerTranslate
     };
-    if (this.refreHeaderNeedSmoothScroll) {
+    if (this.refreshHeaderNeedSmoothScroll) {
       const duration = `${springBackDuration}ms`;
       bodyWrapperStyle.WebkitTransitionDuration = duration;
       bodyWrapperStyle.transitionDuration = duration;
@@ -346,7 +347,7 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
             <QuickTaroRefreshPoint
               refreshing={status === 'refreshing'}
               customStyle={{
-                padding: Taro.pxTransform(30)
+                padding: '5px'
               }}
               {...refreshHeaderProps}
               onHeightChange={this.handleOnRefreshHeaderHeightChange}
