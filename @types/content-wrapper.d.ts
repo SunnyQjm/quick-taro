@@ -24,6 +24,7 @@ export interface QuickTaroContentWrapperProps extends QuickTaroBaseComponentProp
   loadingText?: string,
   showBackTop?: boolean,
   backTopBtnProps?: QuickTaroFloatBtnProps,
+  pageBackground?: string,
 }
 
 declare const QuickTaroContentWrapper: ComponentClass;

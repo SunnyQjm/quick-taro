@@ -33,6 +33,7 @@ export interface QuickTaroContentWrapperProps {
   loadingText?: string,
   showBackTop?: boolean,
   backTopBtnProps?: QuickTaroFloatBtnProps,
+  pageBackground?: string,
 }
 
 interface QuickTaroContentWrapperState {
@@ -56,6 +57,7 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
       verticalMargin: 140,
       horizontalMargin: 40
     },
+    pageBackground: '#f5f5f5',
     onSlideLeft: () => {
 
     },
@@ -222,7 +224,8 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
       headerHeight,
       loadingText,
       showBackTop,
-      backTopBtnProps
+      backTopBtnProps,
+      pageBackground
     } = this.props;
 
     return (
@@ -243,6 +246,9 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
           scrollTop={this.state.scrollTop}
           lowerThreshold={200}
           scrollWithAnimation
+          style={{
+            background: pageBackground
+          }}
         >
           <View style={'height: ' + headerHeight + 'px'}/>
           <View

@@ -85,12 +85,13 @@ export default class Index extends Component<IndexProps, IndexState> {
           mode='refresh-scroll-view'
           navBarProps={{
             title: 'QuickTaroDemo',
-            barBg: '#ccc',
+            barBg: '#fff',
           }}
           contentWrapperProps={{
             showLoading: showLoading,
             showBackTop: true,
             fullScreen: true,
+            pageBackground: 'red'
           }
           }
           refreshScrollViewProps={{
