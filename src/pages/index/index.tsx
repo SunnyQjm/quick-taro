@@ -91,7 +91,6 @@ export default class Index extends Component<IndexProps, IndexState> {
             showLoading: showLoading,
             showBackTop: true,
             fullScreen: true,
-            pageBackground: 'red'
           }
           }
           refreshScrollViewProps={{
@@ -105,91 +104,91 @@ export default class Index extends Component<IndexProps, IndexState> {
             }
           }}
         >
-          {/*<Text>Hello world!</Text>*/}
-          {/*<QuickTaroCircleLoading customStyle={`margin: ${Taro.pxTransform(10)}`}/>*/}
-          {/*<QuickTaroRefreshPoint refreshing={true}/>*/}
-          {/*<QuickTaroRefreshPoint refreshing={false}/>*/}
-          {/*<QuickTaroRefreshPoint refreshing={true} pointStyle={{*/}
-          {/*  backgroundColor: '#af1'*/}
-          {/*}}/>*/}
-          {/*<QuickTaroRefreshPoint*/}
-          {/*  refreshing={true}*/}
-          {/*  pointStyle={{*/}
-          {/*    width: Taro.pxTransform(20),*/}
-          {/*    height: Taro.pxTransform(20),*/}
-          {/*  }}*/}
-          {/*  customStyle={{*/}
-          {/*    padding: Taro.pxTransform(30)*/}
-          {/*  }}*/}
-          {/*/>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
-          {/*<View>Hello world!</View>*/}
+          <Text>Hello world!</Text>
+          <QuickTaroCircleLoading customStyle={`margin: ${Taro.pxTransform(10)}`}/>
+          <QuickTaroRefreshPoint refreshing={true}/>
+          <QuickTaroRefreshPoint refreshing={false}/>
+          <QuickTaroRefreshPoint refreshing={true} pointStyle={{
+            backgroundColor: '#af1'
+          }}/>
+          <QuickTaroRefreshPoint
+            refreshing={true}
+            pointStyle={{
+              width: Taro.pxTransform(20),
+              height: Taro.pxTransform(20),
+            }}
+            customStyle={{
+              padding: Taro.pxTransform(30)
+            }}
+          />
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
+          <View>Hello world!</View>
         </QuickTaroEasyPage>
         <QuickTaroFloatBtnMenu
           icon={logo_header}

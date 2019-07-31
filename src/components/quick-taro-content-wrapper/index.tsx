@@ -1,7 +1,7 @@
 import Taro from '@tarojs/taro';
 import {View, Block, ScrollView} from '@tarojs/components';
 import {AtMessage} from 'taro-ui';
-import {CommonEventFunction, ITouchEvent} from '@tarojs/components/types/common';
+import {CommonEvent, CommonEventFunction, ITouchEvent} from '@tarojs/components/types/common';
 
 import BaseComponent from '../quick-taro-base-component';
 import QuickTaroFloatBtn, {QuickTaroFloatBtnProps} from '../quick-taro-float-btn';
@@ -11,6 +11,7 @@ import 'taro-ui/dist/style/components/message.scss'
 import {
   back_top
 } from '../../images'
+import {CSSProperties} from "react";
 
 
 export interface QuickTaroContentWrapperProps {
@@ -26,7 +27,7 @@ export interface QuickTaroContentWrapperProps {
   onTouchMove?: (e: ITouchEvent) => any,
   onTouchEnd?: (e: ITouchEvent) => any,
   onTouchCancel?: (e: ITouchEvent) => any,
-  onScroll?: (e: CommonEventFunction) => any,
+  onScroll?: (e: CommonEvent) => any,
   scrollX?: boolean,
   scrollY?: boolean,
   onScrollToLower?: (e: CommonEventFunction) => any,
@@ -34,6 +35,7 @@ export interface QuickTaroContentWrapperProps {
   showBackTop?: boolean,
   backTopBtnProps?: QuickTaroFloatBtnProps,
   pageBackground?: string,
+  tabBarHeight: number
 }
 
 interface QuickTaroContentWrapperState {
@@ -58,6 +60,7 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
       horizontalMargin: 40
     },
     pageBackground: '#f5f5f5',
+    tabBarHeight: 0,
     onSlideLeft: () => {
 
     },
@@ -207,9 +210,11 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
 
   handleOnScroll(e: any) {
     if (e.type === 'scroll') {
-      this._scrollTop = e.detail.scrollTop;
-      if (!!this.backTopBtn && this.backTopBtn.updateHideThreshold) {
-        this.backTopBtn.updateHideThreshold(200, this._scrollTop);
+      if (this.props.showBackTop) {    // 只有显示回到顶部按钮的时候才处理回到顶部按钮逻辑
+        this._scrollTop = e.detail.scrollTop;
+        if (!!this.backTopBtn && this.backTopBtn.updateHideThreshold) {
+          this.backTopBtn.updateHideThreshold(200, this._scrollTop);
+        }
       }
       if (this.isH5()) {     //h5
         this.updateScrollTop(e.detail.scrollTop);
@@ -225,9 +230,16 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
       loadingText,
       showBackTop,
       backTopBtnProps,
-      pageBackground
+      pageBackground,
+      tabBarHeight
     } = this.props;
 
+    const scrollViewStyle: CSSProperties = {
+      background: pageBackground
+    };
+    if (this.props.fullScreen) {
+      scrollViewStyle.height = `calc(100vh - ${Taro.pxTransform(tabBarHeight)})`;
+    }
     return (
       <Block>
         <ScrollView
@@ -246,16 +258,10 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
           scrollTop={this.state.scrollTop}
           lowerThreshold={200}
           scrollWithAnimation
-          style={{
-            background: pageBackground
-          }}
+          style={scrollViewStyle}
         >
           <View style={'height: ' + headerHeight + 'px'}/>
-          <View
-            style={`${this.props.fullScreen ? `height: calc(100vh - ${headerHeight}px);` : ''} position: relative;`}
-          >
-            {this.props.children}
-          </View>
+          {this.props.children}
         </ScrollView>
         {
           this.props.showLoading ?

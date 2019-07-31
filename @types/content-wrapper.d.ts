@@ -25,6 +25,9 @@ export interface QuickTaroContentWrapperProps extends QuickTaroBaseComponentProp
   showBackTop?: boolean,
   backTopBtnProps?: QuickTaroFloatBtnProps,
   pageBackground?: string,
+
+  // 自定义TabBar的时候，传入TabBar的高度
+  tabBarHeight?: number
 }
 
 declare const QuickTaroContentWrapper: ComponentClass;

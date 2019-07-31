@@ -3,7 +3,7 @@ import BaseComponent from '../quick-taro-base-component';
 import './index.scss';
 import {QuickTaroContentWrapperProps} from "../quick-taro-content-wrapper";
 import {CSSProperties} from "react";
-import {ITouchEvent} from "@tarojs/components/types/common";
+import {CommonEvent, ITouchEvent} from "@tarojs/components/types/common";
 import QuickTaroContentWrapper from '../quick-taro-content-wrapper';
 import QuickTaroRefreshPoint, {QuickTaroRefreshPointComponentProps} from '../quick-taro-refresh-point';
 import QuickTaroEmptyView, {QuickTaroEmptyViewComponentProps} from '../quick-taro-empty-view';
@@ -123,6 +123,7 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
     this.startRefresh = this.startRefresh.bind(this);
     this.stopRefresh = this.stopRefresh.bind(this);
     this.handleOnRefreshHeaderHeightChange = this.handleOnRefreshHeaderHeightChange.bind(this);
+    this.handleOnScroll = this.handleOnScroll.bind(this);
     this.state = {
       status: 'init',
       scrollDelta: 0,
@@ -153,6 +154,11 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
   _scrollTop: number = 0;
 
   /**
+   * 保存内部状态
+   */
+  _state: 'init' | 'refreshing' | 'pulling' | 'spring-back' | 'pre-refresh' = 'init';
+
+  /**
    * 刷新头是否需要平滑滚动
    */
   refreshHeaderNeedSmoothScroll = false;
@@ -164,6 +170,11 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
     return this._scrollTop <= 0;
   }
 
+  handleOnScroll(e: CommonEvent) {
+    this._scrollTop = e.detail.scrollTop;
+    // console.log(this._scrollTop);
+  }
+
   /**
    * 改变当前状态
    * @param status
@@ -171,6 +182,7 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
    */
   changeStatus(status: 'init' | 'refreshing' | 'pulling' | 'spring-back' | 'pre-refresh', callback: () => any = () => {
   }) {
+    this._state = status;
     this.setState({
       status: status
     }, callback);
@@ -218,7 +230,7 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
         x: e.touches[0].clientX,
         y: e.touches[0].clientY,
       };
-      switch (this.state.status) {
+      switch (this._state) {
         case "init":
           // 在顶部触发下拉操作，切换当前状态为下拉中
           if (newPosition.y > this.startPosition.y) {
@@ -235,7 +247,7 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
           break;
       }
     } else {
-      console.log('not enable refresh of not in top');
+      // console.log('not enable refresh of not in top');
     }
 
   }
@@ -319,6 +331,7 @@ class QuickTaroScrollViewComponent extends BaseComponent<QuickTaroScrollViewComp
         {...contentWrapperProps}
         fullScreen
         scrollY={status === 'init'}
+        onScroll={this.handleOnScroll}
         onTouchStart={this.handleTouchStart}
         onTouchMove={this.handleTouchMove}
         onTouchEnd={this.handleTouchEnd}
