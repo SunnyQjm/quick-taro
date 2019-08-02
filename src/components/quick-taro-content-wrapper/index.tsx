@@ -243,11 +243,7 @@ class QuickTaroContentWrapper extends BaseComponent<QuickTaroContentWrapperProps
     return (
       <Block>
         <ScrollView
-          {
-            ...{
-              throttle: false
-            }
-          }
+          throttle={false}
           scrollX={this.props.scrollX}
           scrollY={this.props.scrollY}
           className='quick-taro-content-wrapper-body'
